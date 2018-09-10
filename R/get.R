@@ -14,7 +14,15 @@
 #'
 #' nes_get(version_id = "1", dest_folder = cache_path() # save to cache folder)
 #' }
-nes_get <- function(version_id, skip = NA, dest_folder = tempdir(), compile = TRUE){
+nes_get <- function(version_id, dest_folder = tempdir(), skip = NA, compile = TRUE){
+
+  # skip sanity check
+  if(!is.na(skip)){
+      tryCatch(if(skip %% 1 != 0){
+          stop("'skip' must be an integer of class numeric.")
+        },
+    error = function(e) stop("'skip' must be an integer of class numeric."))
+  }
 
   # dir.exists(cache_path())
   # dir.create(cache_path(), showWarnings = FALSE)
@@ -22,7 +30,7 @@ nes_get <- function(version_id, skip = NA, dest_folder = tempdir(), compile = TR
   versioned_cache <- file.path(cache_path(), version_id)
   dir.create(versioned_path, showWarnings = FALSE)
   targets <- list(temp_target  = file.path(versioned_path, "NES", "nes_data.csv"),
-               cache_target = file.path(versioned_cache, "NES", "nes_data.csv"))
+                  cache_target = file.path(versioned_cache, "NES", "nes_data.csv"))
 
   # cn <- dataone::CNode("PROD")
   # mn <- dataone::getMNode(cn, "urn:node:KNB")
