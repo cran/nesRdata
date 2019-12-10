@@ -20,8 +20,8 @@ Retrieves external files and store in file cache.
 }
 \examples{
 \dontrun{
-nes_get(version_id = "1") # save to temp folder
+nes_get(version_id = "5") # save to temp folder
 
-nes_get(version_id = "1", dest_folder = cache_path() # save to cache folder)
+nes_get(version_id = "5", dest_folder = cache_path()) # save to cache folder
 }
 }
